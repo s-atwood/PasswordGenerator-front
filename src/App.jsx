@@ -5,18 +5,26 @@ function App() {
   const [data, setData] = useState([{}])
   
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/").then(
-      res => res.json()
-    ).then(
-      data => {
+    fetch("http://127.0.0.1:8000/")
+    .then(res => res.json())
+    .then(data => {
         setData(data)
         console.log(data)
-      }
-    )
+      })
   }, [])
+
+  const fetchData = () => {
+    fetch("http://127.0.0.1:8000/")
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+        console.log(data)
+      })
+  }
 
   return (
     <>
+      <button onClick={fetchData}>Generate New Passphrase</button>
       {Object.keys(data).map((key, index) => (
       <p key={index}>{`${key}: ${JSON.stringify(data[key])}`}</p>
     ))}
